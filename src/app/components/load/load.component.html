@@ -1,0 +1,110 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+            <h1>Encuesta Sobre Redes Sociales</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, 
+                in nostrum reprehenderit expedita cum facere voluptatem praesentium ipsa 
+                ipsam ex et quas qui harum atque enim explicabo, reiciendis error earum.
+            </p>
+        </div>
+    </div>
+    <div *ngIf="nroEncuestas>0">
+        <div class="row mt-4">
+            <div class="col-md-6 mx-auto text-center">
+                <button class="btn btn-outline-primary" routerLink="/Form">Encuesta</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6 mx-auto text-center">
+                <h2>Numero de Encuestas Respondidas: {{nroEncuestas}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md mx-auto text-center">
+                <h4>Se calcula que Facebook tiene un tiempo promedio de uso: {{resTiempoProm(tiempoProm.promF)}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md mx-auto text-center">
+                <h4>Se calcula que Whatsapp tiene un tiempo promedio de uso: {{resTiempoProm(tiempoProm.promW)}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md mx-auto text-center">
+                <h4>Se calcula que Twitter tiene un tiempo promedio de uso: {{resTiempoProm(tiempoProm.promTw)}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md mx-auto text-center">
+                <h4>Se calcula que Instagram tiene un tiempo promedio de uso: {{resTiempoProm(tiempoProm.promIg)}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md mx-auto text-center">
+                <h4>Se calcula que Tiktok tiene un tiempo promedio de uso: {{resTiempoProm(tiempoProm.promTik)}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card mt-5">
+                    <div class="card-body text-center">
+                        <div class="row" *ngIf="compareArrays()">
+                            <h5>Todas tienen la misma cantidad de votos.</h5>
+                        </div>
+                        <div class="row" *ngIf="compareArrays()==false">
+                            <h5 *ngIf="indexMax.length>1">Las Redes Favoritas son:</h5>
+                            <h5 *ngIf="indexMax.length==1">La Red Favorita es: </h5>
+                            <div class="row" *ngFor="let i of indexMax">
+                                <h6>{{redFavorita[i].red}}</h6>
+                            </div>
+                            <h5 *ngIf="indexMin.length>1">Las Redes menos Favoritas son:</h5>
+                            <h5 *ngIf="indexMin.length==1">La Red menos Favorita es: </h5>
+                            <div class="row" *ngFor="let i of indexMin">
+                                <h6>{{redFavorita[i].red}}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <canvas baseChart
+                                [datasets]="barChartData"
+                                [labels]="barChartLabels"
+                                [options]="barChartOptions"
+                                [legend]="barChartLegend">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngFor="let x of rangoEdadUso">
+            <div class="col-md-6 mx-auto">
+                <div class="card mt-5">
+                    <div class="card-body text-center">
+                        <div class="row mb-3">
+                            <h5>Rango de Edades que usan mas {{x.nombreRed}}</h5>
+                        </div>
+                        <div class="row">
+                            <canvas baseChart
+                                [datasets]="[{ data: [x.tiempo_18_25], label: '18-25 Años' },
+                                { data: [x.tiempo_26_33], label: '26-33 Años' },
+                                { data: [x.tiempo_34_40], label: '34-40 Años' },
+                                { data: [x.tiempo_40p], label: '40+ Años' }]"
+                                [labels]="['Rango de Edad que usa mas '+ x.nombreRed ]"
+                                [options]="barChartLegend"
+                                [legend]="barChartLegend">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="nroEncuestas==0">
+        <div class="row">
+            <div class="col-8-md mx-auto text-center">
+                <h3>Se el primero en apoyarnos dandonos tus preferencias con respecto a estas Redes</h3>
+                <button class="btn btn-outline-primary" routerLink="/Form">Encuesta</button>
+            </div>
+        </div>
+    </div>
+</div>

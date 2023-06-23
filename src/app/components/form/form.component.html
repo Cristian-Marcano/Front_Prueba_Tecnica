@@ -1,0 +1,91 @@
+<div class="container p-4" *ngIf="Error">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="alert alert-danger alert-dismissible fade show" >
+                {{messageError}}
+                <button class="btn-close" data-bs-dismiss="alert" aria-label="close" (click)="Error=false; messageError=''">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-4">
+    <div class="rows">
+        <div class="col-md-6 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form (submit)="subirDatos(Favorita,correo,sexo)">
+                        <h4 class="text-center mb-3">Inserte Datos</h4>
+                        <div class="form-group">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" name="correo" placeholder="Correo" autofocus required #correo>
+                                <label for="correo" class="form-label">Correo</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <h5 class="text-center mb-2">Elija Rango de Edad</h5>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="edad" value="18-25" (click)="getEdad($event)">
+                                <label for="edad" class="form-label-check">18-25</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="edad" value="26-33" (click)="getEdad($event)">
+                                <label for="edad" class="form-label-check">26-33</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="edad" value="34-40" (click)="getEdad($event)">
+                                <label for="edad" class="form-label-check">34-40</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="edad" value="40+" (click)="getEdad($event)">
+                                <label for="edad" class="form-label-check">40+</label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <div class="row g-2">
+                                <div class="col-md-3">
+                                    <div class="form-floating">
+                                        <select class="form-select" name="sexo" required #sexo>
+                                            <option value="M">M</option>
+                                            <option value="F">F</option>
+                                        </select>
+                                        <label for="sexo">Sexo</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-floating">
+                                        <select class="form-select" name="favorite" required #Favorita>
+                                            <option value="Facebook">Facebook</option>
+                                            <option value="Whatsapp">Whatsapp</option>
+                                            <option value="Twitter">Twitter</option>
+                                            <option value="Instagram">Instagram</option>
+                                            <option value="Tiktok">Tiktok</option>
+                                        </select>
+                                        <label for="favorite">Red Social Favorita</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <h5 class="text-center mb-2">Tiempo promedio que usas al dia:</h5>
+                            <label for="tiempoF" class="form-label">Facebook: {{tiempoF}} Horas</label>
+                            <input type="range" class="form-range" min="0" max="24" value="0" name="tiempoF" [(ngModel)]="tiempoF">
+                            <label for="tiempoW" class="form-label">Whatsapp: {{tiempoW}} Horas</label>
+                            <input type="range" class="form-range" min="0" max="24" value="0" name="tiempoW" [(ngModel)]="tiempoW">
+                            <label for="tiempoTw" class="form-label">Twitter: {{tiempoTw}} Horas</label>
+                            <input type="range" class="form-range" min="0" max="24" value="0" name="tiempoTw" [(ngModel)]="tiempoTw">
+                            <label for="tiempoIg" class="form-label">Instagram: {{tiempoIg}} Horas</label>
+                            <input type="range" class="form-range" min="0" max="24" value="0" name="tiempoIg" [(ngModel)]="tiempoIg">
+                            <label for="tiempoTik" class="form-label">Tiktok: {{tiempoTik}} Horas</label>
+                            <input type="range" class="form-range" min="0" max="24" value="0" name="tiempoTik" [(ngModel)]="tiempoTik">
+                        </div>
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
